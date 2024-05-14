@@ -18,7 +18,23 @@
 		655BE3662BF3B494001D8F29 /* DetailViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 655BE3652BF3B494001D8F29 /* DetailViewPresenter.swift */; };
 		655BE37A2BF3BD9D001D8F29 /* WeatherService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 655BE3792BF3BD9D001D8F29 /* WeatherService.swift */; };
 		655BE37C2BF3C401001D8F29 /* WeatherForecast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 655BE37B2BF3C401001D8F29 /* WeatherForecast.swift */; };
+		65EF12902BF3D36300319A75 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 65EF128F2BF3D36300319A75 /* RxCocoa */; };
+		65EF12952BF3D36300319A75 /* RxRelay in Frameworks */ = {isa = PBXBuildFile; productRef = 65EF12942BF3D36300319A75 /* RxRelay */; };
+		65EF129A2BF3D36300319A75 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 65EF12992BF3D36300319A75 /* RxSwift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		65EF12A32BF3D36300319A75 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		65065A512BF3A9740004AEF2 /* Weather.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Weather.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -33,6 +49,7 @@
 		655BE3652BF3B494001D8F29 /* DetailViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewPresenter.swift; sourceTree = "<group>"; };
 		655BE3792BF3BD9D001D8F29 /* WeatherService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherService.swift; sourceTree = "<group>"; };
 		655BE37B2BF3C401001D8F29 /* WeatherForecast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherForecast.swift; sourceTree = "<group>"; };
+		65EF12892BF3CD4900319A75 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -40,6 +57,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				65EF12952BF3D36300319A75 /* RxRelay in Frameworks */,
+				65EF12902BF3D36300319A75 /* RxCocoa in Frameworks */,
+				65EF129A2BF3D36300319A75 /* RxSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -66,9 +86,8 @@
 		65065A532BF3A9740004AEF2 /* Weather */ = {
 			isa = PBXGroup;
 			children = (
+				65EF12892BF3CD4900319A75 /* Info.plist */,
 				65065A542BF3A9740004AEF2 /* AppDelegate.swift */,
-				655BE3792BF3BD9D001D8F29 /* WeatherService.swift */,
-				655BE37B2BF3C401001D8F29 /* WeatherForecast.swift */,
 				655BE35B2BF3B1AA001D8F29 /* Home */,
 				655BE3602BF3B469001D8F29 /* Detail */,
 				655BE35A2BF3AE70001D8F29 /* Resources */,
@@ -91,6 +110,8 @@
 				65065A582BF3A9740004AEF2 /* HomeViewController.swift */,
 				655BE35C2BF3B1C7001D8F29 /* HomeViewModel.swift */,
 				655BE35E2BF3B21E001D8F29 /* HomePresenter.swift */,
+				65EF12882BF3CBE900319A75 /* Data */,
+				65EF12872BF3CBD900319A75 /* Service */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -112,6 +133,22 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		65EF12872BF3CBD900319A75 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				655BE3792BF3BD9D001D8F29 /* WeatherService.swift */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
+		65EF12882BF3CBE900319A75 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				655BE37B2BF3C401001D8F29 /* WeatherForecast.swift */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -122,6 +159,7 @@
 				65065A4D2BF3A9740004AEF2 /* Sources */,
 				65065A4E2BF3A9740004AEF2 /* Frameworks */,
 				65065A4F2BF3A9740004AEF2 /* Resources */,
+				65EF12A32BF3D36300319A75 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -129,6 +167,9 @@
 			);
 			name = Weather;
 			packageProductDependencies = (
+				65EF128F2BF3D36300319A75 /* RxCocoa */,
+				65EF12942BF3D36300319A75 /* RxRelay */,
+				65EF12992BF3D36300319A75 /* RxSwift */,
 			);
 			productName = Weather;
 			productReference = 65065A512BF3A9740004AEF2 /* Weather.app */;
@@ -340,8 +381,9 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 5ELVSN39EP;
+				ENABLE_TESTING_SEARCH_PATHS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "";
+				INFOPLIST_FILE = Weather/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -368,8 +410,9 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 5ELVSN39EP;
+				ENABLE_TESTING_SEARCH_PATHS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "";
+				INFOPLIST_FILE = Weather/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -421,6 +464,24 @@
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		65EF128F2BF3D36300319A75 /* RxCocoa */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 655BE36F2BF3B7B1001D8F29 /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxCocoa;
+		};
+		65EF12942BF3D36300319A75 /* RxRelay */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 655BE36F2BF3B7B1001D8F29 /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxRelay;
+		};
+		65EF12992BF3D36300319A75 /* RxSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 655BE36F2BF3B7B1001D8F29 /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxSwift;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 65065A492BF3A9740004AEF2 /* Project object */;
 }
