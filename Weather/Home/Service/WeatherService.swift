@@ -53,7 +53,8 @@ final class WeatherServiceImpl: WeatherService {
                             minTemperature: $0.weather.minTemperature,
                             maxTemperature: $0.weather.maxTemperature,
                             pressure: $0.weather.pressure,
-                            humidity: $0.weather.humidity
+                            humidity: $0.weather.humidity,
+                            conditionsDescription: $0.weatherConditions.description
                         )
                     }
                 )

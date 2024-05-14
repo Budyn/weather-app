@@ -26,10 +26,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let weatherService = WeatherServiceImpl()
         let weatherRepository = WeatherRepositoryImpl(weatherService: weatherService)
         let viewModel = HomeViewModel(weatherRepository: weatherRepository)
-
-        return HomeViewController(
+        let viewController = HomeViewController(
             state: viewModel.state.map(HomePresenter().makeViewState(from:)),
             viewModel: viewModel
         )
+
+        return UINavigationController(rootViewController: viewController)
     }
 }

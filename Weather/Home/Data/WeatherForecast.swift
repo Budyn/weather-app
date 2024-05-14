@@ -9,6 +9,7 @@ struct WeatherForecast {
         let maxTemperature: Double
         let pressure: Double
         let humidity: Double
+        let conditionsDescription: String
     }
 
     let date: Date

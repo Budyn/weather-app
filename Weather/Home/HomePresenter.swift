@@ -8,6 +8,7 @@ struct WeatherRowViewState {
     let minTemperature: String
     let pressure: String
     let humidity: String
+    let conditionsDescription: String
 }
 
 struct HomePresenter {
@@ -35,28 +36,33 @@ struct HomePresenter {
                 maxTemperature: formatMaxTemperature(from: $0.forecasts.first!),
                 minTemperature: formatMinTemperature(from: $0.forecasts.first!),
                 pressure: formatPressure(from: $0.forecasts.first!),
-                humidity: formatHumidity(from: $0.forecasts.first!)
+                humidity: formatHumidity(from: $0.forecasts.first!),
+                conditionsDescription: formatConditionsDescription(from: $0.forecasts.first!)
             )
         }
     }
 
     func formatTemperature(from forecast: WeatherForecast.Forecast) -> String {
-        "\(Int(forecast.maxTemperature))℃"
+        "\(Int(forecast.maxTemperature))℃,"
     }
 
     func formatMaxTemperature(from forecast: WeatherForecast.Forecast) -> String {
-        "\(Int(forecast.maxTemperature))℃"
+        String(localized: "High temp: \(Int(forecast.maxTemperature))℃")
     }
 
     func formatMinTemperature(from forecast: WeatherForecast.Forecast) -> String {
-        "\(Int(forecast.maxTemperature))℃"
+        String(localized: "Low temp: \(Int(forecast.maxTemperature))℃")
     }
 
     func formatPressure(from forecast: WeatherForecast.Forecast) -> String {
-        "\(Int(forecast.pressure))hPa"
+        String(localized: "Pressure \(Int(forecast.pressure))hPa")
     }
 
     func formatHumidity(from forecast: WeatherForecast.Forecast) -> String {
-        "\(Int(forecast.humidity))%"
+        String(localized: "Humidity: \(Int(forecast.humidity))%")
+    }
+
+    func formatConditionsDescription(from forecast: WeatherForecast.Forecast) -> String {
+        forecast.conditionsDescription.capitalized
     }
 }

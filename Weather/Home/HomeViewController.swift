@@ -30,7 +30,7 @@ class HomeViewController: UIViewController {
             .bind(
                 to: tableView.rx.items(cellIdentifier: "WeatherCell", cellType: WeatherRowView.self)
             ) { index, state, cell in
-
+                cell.update(state: state)
             }
             .disposed(by: disposeBag)
 
@@ -38,13 +38,13 @@ class HomeViewController: UIViewController {
     }
 
     private func setup() {
+        title = String(localized: "Weather")
         view.backgroundColor = .systemBackground
 
         tableView.register(
             WeatherRowView.self,
             forCellReuseIdentifier: "WeatherCell"
         )
-
         tableView.rx
             .setDelegate(self)
             .disposed(by: disposeBag)
@@ -73,22 +73,5 @@ extension HomeViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
         print(indexPath)
-    }
-}
-
-private final class WeatherRowView: UITableViewCell {
-
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
-        selectionStyle = .none
-        backgroundView?.backgroundColor = .label
-    }
-
-    required init(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-
-    override func prepareForReuse() {
-        super.prepareForReuse()
     }
 }
