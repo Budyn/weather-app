@@ -6,11 +6,11 @@ import UIKit
 class HomeViewController: UIViewController {
 
     private let tableView = UITableView()
-    private let state: Driver<[WeatherRowViewState]>
+    private let state: Driver<HomeViewState>
     private let viewModel: HomeViewModel
     private let disposeBag = DisposeBag()
 
-    init(state: Driver<[WeatherRowViewState]>, viewModel: HomeViewModel) {
+    init(state: Driver<HomeViewState>, viewModel: HomeViewModel) {
         self.state = state
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
@@ -27,24 +27,25 @@ class HomeViewController: UIViewController {
 
         state
             .asObservable()
-            .bind(
-                to: tableView.rx.items(cellIdentifier: "WeatherCell", cellType: WeatherRowView.self)
-            ) { index, state, cell in
-                cell.update(state: state)
+            .do(onNext: { [weak self] in self?.update(state: $0) })
+            .map { $0.rows }
+            .bind(to: tableView.rx.items(cellIdentifier: "Cell", cellType: WeatherRowView.self)) {
+                $2.update(state: $1)
             }
             .disposed(by: disposeBag)
 
         viewModel.requestWeatherForecast()
     }
 
+    private func update(state: HomeViewState) {
+        title = state.title
+    }
+
     private func setup() {
-        title = String(localized: "Weather")
         view.backgroundColor = .systemBackground
 
-        tableView.register(
-            WeatherRowView.self,
-            forCellReuseIdentifier: "WeatherCell"
-        )
+        tableView.register(WeatherRowView.self, forCellReuseIdentifier: "Cell")
+
         tableView.rx
             .setDelegate(self)
             .disposed(by: disposeBag)

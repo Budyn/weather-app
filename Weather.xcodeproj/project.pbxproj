@@ -27,6 +27,7 @@
 		65EF12B52BF3EC3300319A75 /* WeatherForecast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65EF12B42BF3EC3300319A75 /* WeatherForecast.swift */; };
 		65EF12B72BF410B600319A75 /* WeatherRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65EF12B62BF410B600319A75 /* WeatherRowView.swift */; };
 		65EF12B92BF4165D00319A75 /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65EF12B82BF4165D00319A75 /* UIView+Extensions.swift */; };
+		65EF12BC2BF42B3700319A75 /* WeatherRowViewState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65EF12BB2BF42B3700319A75 /* WeatherRowViewState.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -62,6 +63,7 @@
 		65EF12B42BF3EC3300319A75 /* WeatherForecast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherForecast.swift; sourceTree = "<group>"; };
 		65EF12B62BF410B600319A75 /* WeatherRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherRowView.swift; sourceTree = "<group>"; };
 		65EF12B82BF4165D00319A75 /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
+		65EF12BB2BF42B3700319A75 /* WeatherRowViewState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherRowViewState.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -125,6 +127,7 @@
 				655BE35C2BF3B1C7001D8F29 /* HomeViewModel.swift */,
 				655BE35E2BF3B21E001D8F29 /* HomePresenter.swift */,
 				65EF12B62BF410B600319A75 /* WeatherRowView.swift */,
+				65EF12BB2BF42B3700319A75 /* WeatherRowViewState.swift */,
 				65EF12872BF3CBD900319A75 /* Service */,
 				65EF12882BF3CBE900319A75 /* Data */,
 			);
@@ -270,6 +273,7 @@
 				65EF12A92BF3DFA800319A75 /* String+Extensions.swift in Sources */,
 				655BE35D2BF3B1C7001D8F29 /* HomeViewModel.swift in Sources */,
 				655BE3622BF3B47D001D8F29 /* DetailViewController.swift in Sources */,
+				65EF12BC2BF42B3700319A75 /* WeatherRowViewState.swift in Sources */,
 				65EF12B52BF3EC3300319A75 /* WeatherForecast.swift in Sources */,
 				65065A552BF3A9740004AEF2 /* AppDelegate.swift in Sources */,
 				65EF12B22BF3EB5700319A75 /* CoordinatesResponse.swift in Sources */,

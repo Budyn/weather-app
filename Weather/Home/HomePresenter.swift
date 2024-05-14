@@ -1,14 +1,8 @@
 import Foundation
 
-struct WeatherRowViewState {
-    let day: String
-    let fullDate: String
-    let temperature: String
-    let maxTemperature: String
-    let minTemperature: String
-    let pressure: String
-    let humidity: String
-    let conditionsDescription: String
+struct HomeViewState {
+    let title: String
+    let rows: [WeatherRowViewState]
 }
 
 struct HomePresenter {
@@ -27,42 +21,41 @@ struct HomePresenter {
         return formatter
     }
 
-    func makeViewState(from state: HomeState) -> [WeatherRowViewState] {
-        state.weatherForecasts.map {
-            WeatherRowViewState(
-                day: dayDateFormatter.string(from: $0.date),
-                fullDate: fullDateFormatter.string(from: $0.date),
-                temperature: formatTemperature(from: $0.forecasts.first!),
-                maxTemperature: formatMaxTemperature(from: $0.forecasts.first!),
-                minTemperature: formatMinTemperature(from: $0.forecasts.first!),
-                pressure: formatPressure(from: $0.forecasts.first!),
-                humidity: formatHumidity(from: $0.forecasts.first!),
-                conditionsDescription: formatConditionsDescription(from: $0.forecasts.first!)
-            )
-        }
+    func makeViewState(from state: HomeState) -> HomeViewState {
+        HomeViewState(
+            title: "Weather Forecast for \(state.city.capitalized)",
+            rows: state.midDayWeatherForecasts.map {
+                WeatherRowViewState(
+                    day: dayDateFormatter.string(from: $0.timestamp),
+                    fullDate: fullDateFormatter.string(from: $0.timestamp),
+                    temperature: format(temperature: $0.temperature),
+                    maxTemperature: format(maxTemperature: $0.maxTemperature),
+                    minTemperature: format(minTemperature: $0.minTemperature),
+                    pressure: format(pressure: $0.pressure),
+                    humidity: format(humidity: $0.humidity),
+                    conditionsDescription: $0.conditionsDescription.capitalized
+                )
+            }
+        )
     }
 
-    func formatTemperature(from forecast: WeatherForecast.Forecast) -> String {
-        "\(Int(forecast.maxTemperature))℃,"
+    func format(temperature: Double) -> String {
+        "\(Int(temperature))℃,"
     }
 
-    func formatMaxTemperature(from forecast: WeatherForecast.Forecast) -> String {
-        String(localized: "High temp: \(Int(forecast.maxTemperature))℃")
+    func format(maxTemperature: Double) -> String {
+        String(localized: "High temp: \(Int(maxTemperature))℃")
     }
 
-    func formatMinTemperature(from forecast: WeatherForecast.Forecast) -> String {
-        String(localized: "Low temp: \(Int(forecast.maxTemperature))℃")
+    func format(minTemperature: Double) -> String {
+        String(localized: "Low temp: \(Int(minTemperature))℃")
     }
 
-    func formatPressure(from forecast: WeatherForecast.Forecast) -> String {
-        String(localized: "Pressure \(Int(forecast.pressure))hPa")
+    func format(pressure: Double) -> String {
+        String(localized: "Pressure: \(Int(pressure))hPa")
     }
 
-    func formatHumidity(from forecast: WeatherForecast.Forecast) -> String {
-        String(localized: "Humidity: \(Int(forecast.humidity))%")
-    }
-
-    func formatConditionsDescription(from forecast: WeatherForecast.Forecast) -> String {
-        forecast.conditionsDescription.capitalized
+    func format(humidity: Double) -> String {
+        String(localized: "Humidity: \(Int(humidity))%")
     }
 }
