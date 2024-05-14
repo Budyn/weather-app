@@ -21,6 +21,7 @@
 		65EF12902BF3D36300319A75 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 65EF128F2BF3D36300319A75 /* RxCocoa */; };
 		65EF12952BF3D36300319A75 /* RxRelay in Frameworks */ = {isa = PBXBuildFile; productRef = 65EF12942BF3D36300319A75 /* RxRelay */; };
 		65EF129A2BF3D36300319A75 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 65EF12992BF3D36300319A75 /* RxSwift */; };
+		65EF12A92BF3DFA800319A75 /* String+CodingKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65EF12A82BF3DFA800319A75 /* String+CodingKey.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -50,6 +51,7 @@
 		655BE3792BF3BD9D001D8F29 /* WeatherService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherService.swift; sourceTree = "<group>"; };
 		655BE37B2BF3C401001D8F29 /* WeatherForecast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherForecast.swift; sourceTree = "<group>"; };
 		65EF12892BF3CD4900319A75 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		65EF12A82BF3DFA800319A75 /* String+CodingKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+CodingKey.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -145,6 +147,7 @@
 			isa = PBXGroup;
 			children = (
 				655BE37B2BF3C401001D8F29 /* WeatherForecast.swift */,
+				65EF12A82BF3DFA800319A75 /* String+CodingKey.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -232,6 +235,7 @@
 				655BE37A2BF3BD9D001D8F29 /* WeatherService.swift in Sources */,
 				65065A592BF3A9740004AEF2 /* HomeViewController.swift in Sources */,
 				655BE3642BF3B489001D8F29 /* DetailViewModel.swift in Sources */,
+				65EF12A92BF3DFA800319A75 /* String+CodingKey.swift in Sources */,
 				655BE35D2BF3B1C7001D8F29 /* HomeViewModel.swift in Sources */,
 				655BE3622BF3B47D001D8F29 /* DetailViewController.swift in Sources */,
 				65065A552BF3A9740004AEF2 /* AppDelegate.swift in Sources */,
