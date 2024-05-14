@@ -119,8 +119,8 @@
 				65065A582BF3A9740004AEF2 /* HomeViewController.swift */,
 				655BE35C2BF3B1C7001D8F29 /* HomeViewModel.swift */,
 				655BE35E2BF3B21E001D8F29 /* HomePresenter.swift */,
-				65EF12882BF3CBE900319A75 /* Data */,
 				65EF12872BF3CBD900319A75 /* Service */,
+				65EF12882BF3CBE900319A75 /* Data */,
 			);
 			path = Home;
 			sourceTree = "<group>";

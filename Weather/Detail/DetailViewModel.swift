@@ -5,5 +5,5 @@ struct DetailState {
 }
 
 final class DetailViewModel {
-    let state = HomeState(title: "Home")
+    let state = DetailState(title: "Home")
 }

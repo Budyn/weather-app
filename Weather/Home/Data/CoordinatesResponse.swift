@@ -4,6 +4,7 @@ struct CoordinatesResponse {
 }
 
 extension CoordinatesResponse: Decodable {
+    
     enum CodingKeys: String, CodingKey {
         case latitude = "lat"
         case longitude = "lon"

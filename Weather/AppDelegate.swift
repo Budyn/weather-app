@@ -28,7 +28,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let viewModel = HomeViewModel(weatherRepository: weatherRepository)
 
         return HomeViewController(
-            state: HomePresenter().makeViewState(from: viewModel.state),
+            state: viewModel.state.map(HomePresenter().makeViewState(from:)),
             viewModel: viewModel
         )
     }
