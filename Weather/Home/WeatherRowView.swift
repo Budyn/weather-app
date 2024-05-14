@@ -34,27 +34,27 @@ final class WeatherRowView: UITableViewCell {
             arrangedSubviews: [temperature, conditionsDescription]
         )
 
-        conditionsStackView.spacing = 16
+        conditionsStackView.spacing = 20
 
         let temperatureRangeStackView = UIStackView(
             arrangedSubviews: [maxTemperature, minTemperature]
         )
 
-        temperatureRangeStackView.spacing = 16
+        temperatureRangeStackView.spacing = 20
 
         let detailsStackView = UIStackView(
             arrangedSubviews: [humidity, pressure]
         )
 
-        detailsStackView.spacing = 16
+        detailsStackView.spacing = 20
 
         let weatherStackView = UIStackView(arrangedSubviews: [
             dateStackView,
-            .spacer(height: 16),
+            .spacer(height: 20),
             conditionsStackView,
-            .spacer(height: 16),
+            .spacer(height: 20),
             temperatureRangeStackView,
-            .spacer(height: 8),
+            .spacer(height: 10),
             detailsStackView
         ])
 
@@ -69,7 +69,7 @@ final class WeatherRowView: UITableViewCell {
 
         contentStackView.translatesAutoresizingMaskIntoConstraints = false
         contentStackView.isLayoutMarginsRelativeArrangement = true
-        contentStackView.layoutMargins = UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
+        contentStackView.layoutMargins = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
 
         contentView.addSubview(contentStackView)
 
