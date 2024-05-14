@@ -2,7 +2,7 @@ import Foundation
 import RxSwift
 
 protocol WeatherService {
-    func getWeatherForecast(for city: String) -> Single<WeatherForecastResponse>
+    func getWeatherForecast(in city: String, numberOfDays: Int) -> Single<[WeatherForecast]>
 }
 
 enum WeatherServiceError: Error {
@@ -16,21 +16,58 @@ final class WeatherServiceImpl: WeatherService {
 
     private let apiKey = "4983eab2521f985c5ec7f3c38e4808ea"
 
-    func getWeatherForecast(for city: String) -> Single<WeatherForecastResponse> {
+    func getWeatherForecast(in city: String, numberOfDays: Int) -> Single<[WeatherForecast]> {
         getCooridinates(for: city).flatMap { [weak self] coordinates in
             guard let self = self else { throw WeatherServiceError.deallocated }
             guard let coordinates = coordinates.first else { throw WeatherServiceError.missingData }
 
             return self.getForecast(for: coordinates)
+        }.map { [weak self] response in
+            guard let self = self else { throw WeatherServiceError.deallocated }
+            return self.extractWeatherForecasts(from: response, numberOfDays: numberOfDays)
         }
     }
 
-    private func getForecast(for coordinates: Coordinates) -> Single<WeatherForecastResponse> {
+    private func extractWeatherForecasts(
+        from response: WeatherForecastResponse,
+        numberOfDays: Int
+    ) -> [WeatherForecast] {
+        let futureForecasts = response.forecasts
+            .filter { !Calendar.current.isDateInToday($0.timestamp) }
+
+        return (1 ... numberOfDays).compactMap { interval in
+            let intervalDate = Calendar.current.date(byAdding: .day, value: interval, to: Date())!
+
+            let forecastsInIntervalDate = futureForecasts.filter {
+                Calendar.current.isDate($0.timestamp, equalTo: intervalDate, toGranularity: .day)
+            }
+
+            return forecastsInIntervalDate.isEmpty
+                ? nil
+                : WeatherForecast(
+                    date: intervalDate,
+                    forecasts: forecastsInIntervalDate.map {
+                        WeatherForecast.Forecast(
+                            timestamp: $0.timestamp,
+                            temperature: $0.weather.temperature,
+                            minTemperature: $0.weather.minTemperature,
+                            maxTemperature: $0.weather.maxTemperature,
+                            pressure: $0.weather.pressure,
+                            humidity: $0.weather.humidity
+                        )
+                    }
+                )
+        }
+    }
+
+    private func getForecast(
+        for coordinates: CoordinatesResponse
+    ) -> Single<WeatherForecastResponse> {
         let url = buildWeatherForecastURL(for: coordinates)
         return get(url: url)
     }
 
-    private func getCooridinates(for city: String) -> Single<[Coordinates]> {
+    private func getCooridinates(for city: String) -> Single<[CoordinatesResponse]> {
         let url = buildGeocodingURL(for: city)
         return get(url: url)
     }
@@ -86,7 +123,7 @@ final class WeatherServiceImpl: WeatherService {
         return urlComponents.url!
     }
 
-    private func buildWeatherForecastURL(for coordinates: Coordinates) -> URL {
+    private func buildWeatherForecastURL(for coordinates: CoordinatesResponse) -> URL {
         var urlComponents = URLComponents()
 
         urlComponents.scheme = "https"
@@ -100,17 +137,5 @@ final class WeatherServiceImpl: WeatherService {
         ]
 
         return urlComponents.url!
-    }
-}
-
-private struct Coordinates {
-    let latitude: Double
-    let longitude: Double
-}
-
-extension Coordinates: Decodable {
-    enum CodingKeys: String, CodingKey {
-        case latitude = "lat"
-        case longitude = "lon"
     }
 }

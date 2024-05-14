@@ -1,17 +1,8 @@
 import Foundation
 import RxSwift
 
-struct Weather {
-    let date: Date
-    let temperature: Double
-    let minTemperature: Double
-    let maxTemperature: Double
-    let pressure: Double
-    let humidity: Double
-}
-
 protocol WeatherRepository {
-    func getWeatherForecast(in city: String) -> Single<[Weather]>
+    func getWeatherForecasts(in city: String, numberOfDays: Int) -> Single<[WeatherForecast]>
 }
 
 final class WeatherRepositoryImpl: WeatherRepository {
@@ -22,7 +13,7 @@ final class WeatherRepositoryImpl: WeatherRepository {
         self.weatherService = weatherService
     }
 
-    func getWeatherForecast(in city: String) -> Single<[Weather]> {
-        fatalError()
+    func getWeatherForecasts(in city: String, numberOfDays: Int) -> Single<[WeatherForecast]> {
+        weatherService.getWeatherForecast(in: city, numberOfDays: numberOfDays)
     }
 }

@@ -1,0 +1,16 @@
+import Foundation
+
+struct WeatherForecast {
+
+    struct Forecast {
+        let timestamp: Date
+        let temperature: Double
+        let minTemperature: Double
+        let maxTemperature: Double
+        let pressure: Double
+        let humidity: Double
+    }
+
+    let date: Date
+    let forecasts: [Forecast]
+}
