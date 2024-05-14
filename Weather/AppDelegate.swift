@@ -9,28 +9,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         _ application: UIApplication,
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
     ) -> Bool {
-        let window = buildAppWindow()
-    
-        window.makeKeyAndVisible()
-        self.window = window
-
+        self.window = buildAppWindow()
         return true
     }
 
     private func buildAppWindow() -> UIWindow {
         let window = UIWindow(frame: UIScreen.main.bounds)
+
         window.rootViewController = buildHome()
+        window.makeKeyAndVisible()
+
         return window
     }
 
     private func buildHome() -> UIViewController {
         let weatherService = WeatherServiceImpl()
-        let viewModel = HomeViewModel(weatherService: weatherService)
-        let presenter = HomePresenter()
-        let view = HomeViewController(
-            state: presenter.makeViewState(from: viewModel.state),
+        let weatherRepository = WeatherRepositoryImpl(weatherService: weatherService)
+        let viewModel = HomeViewModel(weatherRepository: weatherRepository)
+
+        return HomeViewController(
+            state: HomePresenter().makeViewState(from: viewModel.state),
             viewModel: viewModel
         )
-        return view
     }
 }

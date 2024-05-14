@@ -1,6 +1,6 @@
 import Foundation
 
-struct WeatherForecast {
+struct WeatherForecastResponse {
 
     struct Forecast {
 
@@ -19,14 +19,14 @@ struct WeatherForecast {
     let forecasts: [Forecast]
 }
 
-extension WeatherForecast: Decodable {
+extension WeatherForecastResponse: Decodable {
 
     enum CodingKeys: String, CodingKey {
         case forecasts = "list"
     }
 }
 
-extension WeatherForecast.Forecast: Decodable {
+extension WeatherForecastResponse.Forecast: Decodable {
 
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: String.self)
@@ -36,7 +36,7 @@ extension WeatherForecast.Forecast: Decodable {
     }
 }
 
-extension WeatherForecast.Forecast.Weather: Decodable {
+extension WeatherForecastResponse.Forecast.Weather: Decodable {
 
     enum CodingKeys: String, CodingKey {
         case temperature = "temp"

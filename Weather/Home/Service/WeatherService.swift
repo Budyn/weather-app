@@ -2,7 +2,7 @@ import Foundation
 import RxSwift
 
 protocol WeatherService {
-    func getWeatherForecast(for city: String) -> Single<WeatherForecast>
+    func getWeatherForecast(for city: String) -> Single<WeatherForecastResponse>
 }
 
 enum WeatherServiceError: Error {
@@ -16,7 +16,7 @@ final class WeatherServiceImpl: WeatherService {
 
     private let apiKey = "4983eab2521f985c5ec7f3c38e4808ea"
 
-    func getWeatherForecast(for city: String) -> Single<WeatherForecast> {
+    func getWeatherForecast(for city: String) -> Single<WeatherForecastResponse> {
         getCooridinates(for: city).flatMap { [weak self] coordinates in
             guard let self = self else { throw WeatherServiceError.deallocated }
             guard let coordinates = coordinates.first else { throw WeatherServiceError.missingData }
@@ -25,7 +25,7 @@ final class WeatherServiceImpl: WeatherService {
         }
     }
 
-    private func getForecast(for coordinates: Coordinates) -> Single<WeatherForecast> {
+    private func getForecast(for coordinates: Coordinates) -> Single<WeatherForecastResponse> {
         let url = buildWeatherForecastURL(for: coordinates)
         return get(url: url)
     }
