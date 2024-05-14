@@ -3,18 +3,30 @@ import UIKit
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
+    var window: UIWindow?
+
     func application(
         _ application: UIApplication,
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
     ) -> Bool {
-        true
+        let window = buildAppWindow()
+    
+        window.makeKeyAndVisible()
+        self.window = window
+
+        return true
     }
 
-    func application(
-        _ application: UIApplication,
-        configurationForConnecting connectingSceneSession: UISceneSession,
-        options: UIScene.ConnectionOptions
-    ) -> UISceneConfiguration {
-        UISceneConfiguration(name: "Default Configuration", sessionRole: connectingSceneSession.role)
+    private func buildAppWindow() -> UIWindow {
+        let window = UIWindow(frame: UIScreen.main.bounds)
+        window.rootViewController = buildHome()
+        return window
+    }
+
+    private func buildHome() -> UIViewController {
+        let viewModel = HomeViewModel()
+        let presenter = HomePresenter()
+        let view = HomeViewController(state: presenter.makeViewState(from: viewModel.state))
+        return view
     }
 }
