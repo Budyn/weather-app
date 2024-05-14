@@ -17,6 +17,10 @@
 		655BE3622BF3B47D001D8F29 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 655BE3612BF3B47D001D8F29 /* DetailViewController.swift */; };
 		655BE3642BF3B489001D8F29 /* DetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 655BE3632BF3B489001D8F29 /* DetailViewModel.swift */; };
 		655BE3662BF3B494001D8F29 /* DetailViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 655BE3652BF3B494001D8F29 /* DetailViewPresenter.swift */; };
+		655BE3722BF3B847001D8F29 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 655BE3712BF3B847001D8F29 /* RxSwift */; };
+		655BE3742BF3B8A2001D8F29 /* RxRelay in Frameworks */ = {isa = PBXBuildFile; productRef = 655BE3732BF3B8A2001D8F29 /* RxRelay */; };
+		655BE3762BF3B8AF001D8F29 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 655BE3752BF3B8AF001D8F29 /* RxCocoa */; };
+		655BE3782BF3B8B3001D8F29 /* RxTest in Frameworks */ = {isa = PBXBuildFile; productRef = 655BE3772BF3B8B3001D8F29 /* RxTest */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +53,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				655BE3782BF3B8B3001D8F29 /* RxTest in Frameworks */,
+				655BE3762BF3B8AF001D8F29 /* RxCocoa in Frameworks */,
+				655BE3742BF3B8A2001D8F29 /* RxRelay in Frameworks */,
+				655BE3722BF3B847001D8F29 /* RxSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -68,6 +76,7 @@
 				65065A532BF3A9740004AEF2 /* Weather */,
 				65065A6A2BF3A9750004AEF2 /* WeatherTests */,
 				65065A522BF3A9740004AEF2 /* Products */,
+				655BE3702BF3B847001D8F29 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -128,6 +137,13 @@
 			path = Detail;
 			sourceTree = "<group>";
 		};
+		655BE3702BF3B847001D8F29 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -144,6 +160,12 @@
 			dependencies = (
 			);
 			name = Weather;
+			packageProductDependencies = (
+				655BE3712BF3B847001D8F29 /* RxSwift */,
+				655BE3732BF3B8A2001D8F29 /* RxRelay */,
+				655BE3752BF3B8AF001D8F29 /* RxCocoa */,
+				655BE3772BF3B8B3001D8F29 /* RxTest */,
+			);
 			productName = Weather;
 			productReference = 65065A512BF3A9740004AEF2 /* Weather.app */;
 			productType = "com.apple.product-type.application";
@@ -528,6 +550,29 @@
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		655BE3712BF3B847001D8F29 /* RxSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 655BE36F2BF3B7B1001D8F29 /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxSwift;
+		};
+		655BE3732BF3B8A2001D8F29 /* RxRelay */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 655BE36F2BF3B7B1001D8F29 /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxRelay;
+		};
+		655BE3752BF3B8AF001D8F29 /* RxCocoa */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 655BE36F2BF3B7B1001D8F29 /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxCocoa;
+		};
+		655BE3772BF3B8B3001D8F29 /* RxTest */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 655BE36F2BF3B7B1001D8F29 /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxTest;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 65065A492BF3A9740004AEF2 /* Project object */;
 }
