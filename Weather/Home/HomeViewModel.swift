@@ -17,7 +17,7 @@ final class HomeViewModel {
     }
 
     func requestWeatherForecast() {
-        weatherService.getForecast(for: "Paris").subscribe(onSuccess: {
+        weatherService.getWeatherForecast(for: "Paris").subscribe(onSuccess: {
             print($0)
         }).disposed(by: disposeBag)
     }
