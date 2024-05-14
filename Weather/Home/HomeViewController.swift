@@ -3,9 +3,11 @@ import UIKit
 class HomeViewController: UIViewController {
 
     private let state: HomeViewState
+    private let viewModel: HomeViewModel
 
-    init(state: HomeViewState) {
+    init(state: HomeViewState, viewModel: HomeViewModel) {
         self.state = state
+        self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -16,6 +18,7 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
+        viewModel.requestWeatherForecast()
     }
 
     private func setup() {
