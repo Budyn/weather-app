@@ -6,6 +6,7 @@ extension DateFormatter {
         let formatter = DateFormatter()
         formatter.dateFormat = "EEEE"
         formatter.locale = .current
+        formatter.calendar = .autoupdatingCurrent
         return formatter
     }
 
@@ -13,6 +14,7 @@ extension DateFormatter {
         let formatter = DateFormatter()
         formatter.dateFormat = "dd/MM/yyyy"
         formatter.locale = .current
+        formatter.calendar = .autoupdatingCurrent
         return formatter
     }
 
@@ -20,6 +22,7 @@ extension DateFormatter {
         let formatter = DateFormatter()
         formatter.dateFormat = "HH:mm"
         formatter.locale = .current
+        formatter.calendar = .autoupdatingCurrent
         return formatter
     }
 }

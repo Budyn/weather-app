@@ -9,7 +9,7 @@ struct HomePresenter {
     
     func makeViewState(from state: HomeState) -> HomeViewState {
         HomeViewState(
-            title: "Weather Forecast for \(state.city.capitalized)",
+            title: String(localized: "Weather Forecast for \(state.city.capitalized)"),
             rows: state.midDayWeatherForecasts.map {
                 WeatherRowViewState(
                     headline: DateFormatter.dayDateFormatter.string(from: $0.timestamp),
@@ -27,7 +27,7 @@ struct HomePresenter {
     }
 
     func format(temperature: Double) -> String {
-        "\(Int(temperature))℃,"
+        String(localized: "\(Int(temperature))℃,")
     }
 
     func format(maxTemperature: Double) -> String {

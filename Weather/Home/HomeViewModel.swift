@@ -23,7 +23,7 @@ final class HomeViewModelImpl: HomeViewModel {
     private let router: HomeRouter
     private let weatherRepository: WeatherRepository
     private let disposeBag = DisposeBag()
-    private let city = "Paris"
+    private let city = String(localized: "Paris")
 
     init(
         router: HomeRouter,

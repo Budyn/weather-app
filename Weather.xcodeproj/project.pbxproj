@@ -58,7 +58,7 @@
 		655BE3652BF3B494001D8F29 /* DetailViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewPresenter.swift; sourceTree = "<group>"; };
 		655BE3792BF3BD9D001D8F29 /* WeatherService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherService.swift; sourceTree = "<group>"; };
 		655BE37B2BF3C401001D8F29 /* WeatherForecastResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherForecastResponse.swift; sourceTree = "<group>"; };
-		65EF12892BF3CD4900319A75 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		65EF12892BF3CD4900319A75 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		65EF12A82BF3DFA800319A75 /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
 		65EF12AC2BF3E08900319A75 /* WeatherRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherRepository.swift; sourceTree = "<group>"; };
 		65EF12B12BF3EB5700319A75 /* CoordinatesResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatesResponse.swift; sourceTree = "<group>"; };
@@ -104,15 +104,15 @@
 		65065A532BF3A9740004AEF2 /* Weather */ = {
 			isa = PBXGroup;
 			children = (
-				65EF12892BF3CD4900319A75 /* Info.plist */,
 				65065A542BF3A9740004AEF2 /* AppDelegate.swift */,
 				655BE35B2BF3B1AA001D8F29 /* Home */,
 				655BE3602BF3B469001D8F29 /* Detail */,
+				65EF12C12BF4441F00319A75 /* UI */,
 				65EF12872BF3CBD900319A75 /* Service */,
 				65EF12882BF3CBE900319A75 /* Data */,
-				65EF12BA2BF4167900319A75 /* Tools */,
 				65EF12AE2BF3E08F00319A75 /* Foundation */,
 				655BE35A2BF3AE70001D8F29 /* Resources */,
+				65EF12C22BF4445300319A75 /* Config */,
 			);
 			path = Weather;
 			sourceTree = "<group>";
@@ -133,8 +133,6 @@
 				65065A582BF3A9740004AEF2 /* HomeViewController.swift */,
 				655BE35C2BF3B1C7001D8F29 /* HomeViewModel.swift */,
 				655BE35E2BF3B21E001D8F29 /* HomePresenter.swift */,
-				65EF12B62BF410B600319A75 /* WeatherRowView.swift */,
-				65EF12BB2BF42B3700319A75 /* WeatherRowViewState.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -178,18 +176,28 @@
 		65EF12AE2BF3E08F00319A75 /* Foundation */ = {
 			isa = PBXGroup;
 			children = (
+				65EF12BF2BF4374D00319A75 /* DateFormatter+Extensions.swift */,
 				65EF12A82BF3DFA800319A75 /* String+Extensions.swift */,
 			);
 			path = Foundation;
 			sourceTree = "<group>";
 		};
-		65EF12BA2BF4167900319A75 /* Tools */ = {
+		65EF12C12BF4441F00319A75 /* UI */ = {
 			isa = PBXGroup;
 			children = (
 				65EF12B82BF4165D00319A75 /* UIView+Extensions.swift */,
-				65EF12BF2BF4374D00319A75 /* DateFormatter+Extensions.swift */,
+				65EF12B62BF410B600319A75 /* WeatherRowView.swift */,
+				65EF12BB2BF42B3700319A75 /* WeatherRowViewState.swift */,
 			);
-			path = Tools;
+			path = UI;
+			sourceTree = "<group>";
+		};
+		65EF12C22BF4445300319A75 /* Config */ = {
+			isa = PBXGroup;
+			children = (
+				65EF12892BF3CD4900319A75 /* Info.plist */,
+			);
+			path = Config;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -435,7 +443,7 @@
 				DEVELOPMENT_TEAM = 5ELVSN39EP;
 				ENABLE_TESTING_SEARCH_PATHS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = Weather/Info.plist;
+				INFOPLIST_FILE = Weather/Config/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -464,7 +472,7 @@
 				DEVELOPMENT_TEAM = 5ELVSN39EP;
 				ENABLE_TESTING_SEARCH_PATHS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = Weather/Info.plist;
+				INFOPLIST_FILE = Weather/Config/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";

@@ -26,11 +26,11 @@ struct DetailPresenter {
     }
 
     private func formatTitle(for date: Date) -> String {
-        "Weather for \(DateFormatter.fullDateFormatter.string(from: date))"
+        String(localized: "Weather for \(DateFormatter.fullDateFormatter.string(from: date))")
     }
 
     func format(temperature: Double) -> String {
-        "\(Int(temperature))℃,"
+        String(localized: "\(Int(temperature))℃,")
     }
 
     func format(maxTemperature: Double) -> String {
