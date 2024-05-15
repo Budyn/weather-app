@@ -5,7 +5,6 @@ import UIKit
 class HomeViewController: UIViewController {
 
     private let tableView = UITableView()
-
     private let state: Driver<HomeViewState>
     private let viewModel: HomeViewModel
     private let disposeBag = DisposeBag()
@@ -34,11 +33,7 @@ class HomeViewController: UIViewController {
             }
             .disposed(by: disposeBag)
 
-        viewModel.requestWeatherForecast()
-    }
-
-    private func update(state: HomeViewState) {
-        title = state.title
+        viewModel.refreshWeatherForecast()
     }
 
     private func setup() {
@@ -48,6 +43,13 @@ class HomeViewController: UIViewController {
 
         tableView.rx
             .setDelegate(self)
+            .disposed(by: disposeBag)
+
+        tableView.rx.itemSelected
+            .subscribe(onNext: { [weak self] indexPath in
+                self?.viewModel.openWeatherDetails(for: indexPath)
+                self?.tableView.deselectRow(at: indexPath, animated: false)
+            })
             .disposed(by: disposeBag)
     }
 
@@ -67,6 +69,10 @@ class HomeViewController: UIViewController {
         tableView.trailingAnchor.constraint(
             equalTo: view.safeAreaLayoutGuide.trailingAnchor
         ).isActive = true
+    }
+
+    private func update(state: HomeViewState) {
+        title = state.title
     }
 }
 

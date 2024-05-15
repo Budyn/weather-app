@@ -1,14 +1,17 @@
 import Foundation
-import RxSwift
 import RxCocoa
+import RxSwift
+import UIKit
 
 struct HomeState {
     let city: String
+    let weatherForecasts: [WeatherForecast]
     let midDayWeatherForecasts: [WeatherForecast.Forecast]
 }
 
 protocol HomeViewModel {
-    func requestWeatherForecast()
+    func openWeatherDetails(for indexPath: IndexPath)
+    func refreshWeatherForecast()
 }
 
 final class HomeViewModelImpl: HomeViewModel {
@@ -17,26 +20,54 @@ final class HomeViewModelImpl: HomeViewModel {
 
     private let _state: BehaviorRelay<HomeState>
 
+    private let router: HomeRouter
     private let weatherRepository: WeatherRepository
     private let disposeBag = DisposeBag()
     private let city = "Paris"
 
-    init(weatherRepository: WeatherRepository) {
-        self._state = BehaviorRelay(value: HomeState(city: city, midDayWeatherForecasts: []))
-        self.state = _state.asDriver(
-            onErrorJustReturn: HomeState(city: city, midDayWeatherForecasts: [])
+    init(
+        router: HomeRouter,
+        weatherRepository: WeatherRepository
+    ) {
+        self._state = BehaviorRelay(
+            value: HomeState(
+                city: city,
+                weatherForecasts: [],
+                midDayWeatherForecasts: []
+            )
         )
+        self.state = _state.asDriver(
+            onErrorJustReturn: HomeState(
+                city: city,
+                weatherForecasts: [],
+                midDayWeatherForecasts: []
+            )
+        )
+        self.router = router
         self.weatherRepository = weatherRepository
     }
 
-    func requestWeatherForecast() {
+    func openWeatherDetails(for indexPath: IndexPath) {
+        let viewModel = DetailViewModel(
+            weatherForecast: _state.value.weatherForecasts[indexPath.row]
+        )
+        let view = DetailViewController(
+            state: viewModel.state.map(DetailPresenter().makeViewState(from:))
+        )
+        router.present(view)
+    }
+
+    func refreshWeatherForecast() {
         weatherRepository
             .getWeatherForecasts(in: city, numberOfDays: 5)
-            .compactMap { [weak self] in
-                self?.findMidDayForecasts(from: $0)
-            }
             .subscribe(onSuccess: { [weak self, city] in
-                self?._state.accept(HomeState(city: city, midDayWeatherForecasts: $0))
+                self?._state.accept(
+                    HomeState(
+                        city: city,
+                        weatherForecasts: $0,
+                        midDayWeatherForecasts: self?.findMidDayForecasts(from: $0) ?? []
+                    )
+                )
             })
             .disposed(by: disposeBag)
     }

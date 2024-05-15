@@ -2,7 +2,7 @@ import UIKit
 
 final class WeatherRowView: UITableViewCell {
 
-    private let dayLabel = UILabel()
+    private let headlineLabel = UILabel()
     private let dateLabel = UILabel()
     private let conditionsDescription = UILabel()
     private let temperature = UILabel()
@@ -10,6 +10,7 @@ final class WeatherRowView: UITableViewCell {
     private let minTemperature = UILabel()
     private let humidity = UILabel()
     private let pressure = UILabel()
+    private let chevron = UIImageView(image: UIImage(systemName: "chevron.right"))
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -23,7 +24,7 @@ final class WeatherRowView: UITableViewCell {
 
     private func layout() {
         let dateStackView = UIStackView(
-            arrangedSubviews: [dayLabel, dateLabel]
+            arrangedSubviews: [headlineLabel, dateLabel]
         )
 
         dateStackView.axis = .vertical
@@ -61,8 +62,6 @@ final class WeatherRowView: UITableViewCell {
         weatherStackView.axis = .vertical
         weatherStackView.alignment = .leading
 
-        let chevron = UIImageView(image: UIImage(systemName: "chevron.right"))
-
         chevron.contentMode = .scaleAspectFit
 
         let contentStackView = UIStackView(arrangedSubviews: [weatherStackView, chevron])
@@ -88,8 +87,8 @@ final class WeatherRowView: UITableViewCell {
     }
 
     private func setup() {
-        dayLabel.font = .preferredFont(forTextStyle: .largeTitle)
-        dayLabel.textColor = .accent
+        headlineLabel.font = .preferredFont(forTextStyle: .largeTitle)
+        headlineLabel.textColor = .accent
         dateLabel.font = .preferredFont(forTextStyle: .footnote)
         temperature.font = .preferredFont(forTextStyle: .title2)
         conditionsDescription.font = .preferredFont(forTextStyle: .title2)
@@ -100,7 +99,7 @@ final class WeatherRowView: UITableViewCell {
     }
 
     func update(state: WeatherRowViewState) {
-        dayLabel.text = state.day
+        headlineLabel.text = state.headline
         dateLabel.text = state.fullDate
         temperature.text = state.temperature
         conditionsDescription.text = state.conditionsDescription
@@ -108,5 +107,6 @@ final class WeatherRowView: UITableViewCell {
         minTemperature.text = state.minTemperature
         humidity.text = state.humidity
         pressure.text = state.pressure
+        chevron.isHidden = !state.isChevronPresented
     }
 }

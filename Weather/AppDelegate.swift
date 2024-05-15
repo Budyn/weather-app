@@ -25,12 +25,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private func buildHome() -> UIViewController {
         let weatherService = WeatherServiceImpl()
         let weatherRepository = WeatherRepositoryImpl(weatherService: weatherService)
-        let viewModel = HomeViewModelImpl(weatherRepository: weatherRepository)
+        let navigationController = UINavigationController()
+        let viewModel = HomeViewModelImpl(
+            router: HomeRouter(navigationController: navigationController),
+            weatherRepository: weatherRepository
+        )
         let viewController = HomeViewController(
             state: viewModel.state.map(HomePresenter().makeViewState(from:)),
             viewModel: viewModel
         )
 
-        return UINavigationController(rootViewController: viewController)
+        navigationController.setViewControllers([viewController], animated: false)
+
+        return navigationController
     }
 }
