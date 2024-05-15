@@ -7,7 +7,11 @@ struct HomeState {
     let midDayWeatherForecasts: [WeatherForecast.Forecast]
 }
 
-final class HomeViewModel {
+protocol HomeViewModel {
+    func requestWeatherForecast()
+}
+
+final class HomeViewModelImpl: HomeViewModel {
 
     let state: Driver<HomeState>
 

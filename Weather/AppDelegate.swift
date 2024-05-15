@@ -25,7 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private func buildHome() -> UIViewController {
         let weatherService = WeatherServiceImpl()
         let weatherRepository = WeatherRepositoryImpl(weatherService: weatherService)
-        let viewModel = HomeViewModel(weatherRepository: weatherRepository)
+        let viewModel = HomeViewModelImpl(weatherRepository: weatherRepository)
         let viewController = HomeViewController(
             state: viewModel.state.map(HomePresenter().makeViewState(from:)),
             viewModel: viewModel
