@@ -29,8 +29,8 @@ struct HomePresenter {
                     day: dayDateFormatter.string(from: $0.timestamp),
                     fullDate: fullDateFormatter.string(from: $0.timestamp),
                     temperature: format(temperature: $0.temperature),
-                    maxTemperature: format(maxTemperature: $0.maxTemperature),
-                    minTemperature: format(minTemperature: $0.minTemperature),
+                    maxTemperature: format(maxTemperature: $0.dayMaxTemperature),
+                    minTemperature: format(minTemperature: $0.dayMinTemperature),
                     pressure: format(pressure: $0.pressure),
                     humidity: format(humidity: $0.humidity),
                     conditionsDescription: $0.conditionsDescription.capitalized

@@ -2,10 +2,10 @@ import RxCocoa
 import RxSwift
 import UIKit
 
-
 class HomeViewController: UIViewController {
 
     private let tableView = UITableView()
+
     private let state: Driver<HomeViewState>
     private let viewModel: HomeViewModel
     private let disposeBag = DisposeBag()

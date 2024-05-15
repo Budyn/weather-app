@@ -27,7 +27,7 @@ final class HomeViewModel {
 
     func requestWeatherForecast() {
         weatherRepository
-            .getWeatherForecasts(in: "Paris", numberOfDays: 5)
+            .getWeatherForecasts(in: city, numberOfDays: 5)
             .compactMap { [weak self] in
                 self?.findMidDayForecasts(from: $0)
             }

@@ -42,6 +42,13 @@ final class WeatherServiceImpl: WeatherService {
                 Calendar.current.isDate($0.timestamp, equalTo: intervalDate, toGranularity: .day)
             }
 
+            let dayMaxTemperature = forecastsInIntervalDate
+                .max { $0.weather.maxTemperature < $1.weather.maxTemperature }
+                .map { $0.weather.maxTemperature } ?? 0
+            let dayMinTemperature = forecastsInIntervalDate
+                .min { $0.weather.minTemperature < $1.weather.minTemperature }
+                .map { $0.weather.minTemperature } ?? 0
+
             return forecastsInIntervalDate.isEmpty
                 ? nil
                 : WeatherForecast(
@@ -54,7 +61,9 @@ final class WeatherServiceImpl: WeatherService {
                             maxTemperature: $0.weather.maxTemperature,
                             pressure: $0.weather.pressure,
                             humidity: $0.weather.humidity,
-                            conditionsDescription: $0.weatherConditions.description
+                            conditionsDescription: $0.weatherConditions.description,
+                            dayMinTemperature: dayMinTemperature, 
+                            dayMaxTemperature: dayMaxTemperature
                         )
                     }
                 )

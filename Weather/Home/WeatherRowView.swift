@@ -27,7 +27,7 @@ final class WeatherRowView: UITableViewCell {
         )
 
         dateStackView.axis = .vertical
-        dateStackView.spacing = 4
+        dateStackView.spacing = 5
         dateStackView.alignment = .leading
 
         let conditionsStackView = UIStackView(
@@ -73,10 +73,18 @@ final class WeatherRowView: UITableViewCell {
 
         contentView.addSubview(contentStackView)
 
-        contentStackView.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
-        contentStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
-        contentStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
-        contentStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
+        contentStackView.topAnchor.constraint(
+            equalTo: contentView.topAnchor
+        ).isActive = true
+        contentStackView.bottomAnchor.constraint(
+            equalTo: contentView.bottomAnchor
+        ).isActive = true
+        contentStackView.leadingAnchor.constraint(
+            equalTo: contentView.leadingAnchor
+        ).isActive = true
+        contentStackView.trailingAnchor.constraint(
+            equalTo: contentView.trailingAnchor
+        ).isActive = true
     }
 
     private func setup() {
