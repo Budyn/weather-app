@@ -4,7 +4,7 @@ import RxTest
 @testable import Weather
 import XCTest
 
-final class WeatherServiceTests: XCTestCase {
+final class GeocodingServiceTests: XCTestCase {
 
     private var disposeBag: DisposeBag!
 
@@ -18,24 +18,18 @@ final class WeatherServiceTests: XCTestCase {
         super.tearDown()
     }
 
-    func testGetWeatherForecastReturnsWeatherForecast() {
-        let dataFetcher = DataFetcherMock(response: fakeWeatherForecast)
-        let geocodingStub = GeocodingServiceStub(
-            response: CoordinatesResponse(latitude: 40, longitude: 40)
-        )
-        let sut = WeatherServiceImpl(
-            dataFetcher: dataFetcher,
-            geocodingService: geocodingStub
-        )
+    func testGetCoordinatesReturnsCoordinates() {
+        let dataFetcher = DataFetcherMock(response: fakeCoordinatesResponse)
+        let sut = GeocodingServiceImpl(dataFetcher: dataFetcher)
 
         let expectation = expectation(description: "Should send data")
 
-        sut.getWeatherForecast(in: "Paris", numberOfDays: 5).asObservable()
+        sut.getCoordinates(for: "paris").asObservable()
             .subscribe(
                 onNext: { response in
-                    XCTAssertEqual(response.count, 5)
-                    XCTAssertEqual(response.first!.forecasts.first!.pressure, 1008)
-                    XCTAssertEqual(response.first!.forecasts.first!.conditionsDescription, "clear sky")
+                    XCTAssertNotNil(response)
+                    XCTAssertTrue(response!.latitude.isNearlyEqual(to: 51.5073219))
+                    XCTAssertTrue(response!.longitude.isNearlyEqual(to: -0.1276474))
                     expectation.fulfill()
                 },
                 onError: { _ in
@@ -52,25 +46,19 @@ final class WeatherServiceTests: XCTestCase {
         }
     }
 
-    func testGetWeatherForecastWithCorruptedResponseReturnsError() {
+    func testGetCoordinatesWihCorruptedDataReturnsError() {
         let dataFetcher = DataFetcherMock(errorToSend: DataFetchingError.decoding)
-        let geocodingStub = GeocodingServiceStub(
-            response: CoordinatesResponse(latitude: 40, longitude: 40)
-        )
-        let sut = WeatherServiceImpl(
-            dataFetcher: dataFetcher,
-            geocodingService: geocodingStub
-        )
+        let sut = GeocodingServiceImpl(dataFetcher: dataFetcher)
 
         let expectation = expectation(description: "Should send error")
 
-        sut.getWeatherForecast(in: "Paris", numberOfDays: 5).asObservable()
+        sut.getCoordinates(for: "paris").asObservable()
             .subscribe(
                 onNext: { _ in
                     XCTFail("Should not happen")
                 },
-                onError: {
-                    switch $0 as? DataFetchingError {
+                onError: { error in
+                    switch error as? DataFetchingError {
                     case .decoding:
                         expectation.fulfill()
                     default:
@@ -89,3 +77,8 @@ final class WeatherServiceTests: XCTestCase {
     }
 }
 
+private extension FloatingPoint {
+    func isNearlyEqual(to value: Self) -> Bool {
+        return abs(self - value) <= .ulpOfOne
+    }
+}
