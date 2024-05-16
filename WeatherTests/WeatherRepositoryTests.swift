@@ -25,6 +25,8 @@ final class WeatherRepositoryTests: XCTestCase {
 
         let expectation = expectation(description: "Should send data")
 
+        XCTAssertFalse(weatherServiceMock.didCall)
+
         sut.getWeatherForecasts(in: "paris", numberOfDays: 5).asObservable()
             .subscribe(
                 onNext: { _ in
