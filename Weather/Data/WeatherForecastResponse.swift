@@ -45,7 +45,7 @@ extension WeatherForecastResponse.Forecast: Decodable {
         if let condition = conditions.first {
             weatherConditions = condition
         } else {
-            throw WeatherServiceError.decoding
+            throw DataFetchingError.decoding
         }
     }
 }

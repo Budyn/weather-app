@@ -7,12 +7,16 @@ protocol WeatherService {
 
 enum WeatherServiceError: Error {
     case deallocated
-    case statusCode(Int)
     case missingData
-    case decoding
 }
 
 final class WeatherServiceImpl: WeatherService {
+
+    private let dataFetcher: DataFetching
+
+    init(dataFetcher: DataFetching) {
+        self.dataFetcher = dataFetcher
+    }
 
     private let apiKey = "4983eab2521f985c5ec7f3c38e4808ea"
 
@@ -73,49 +77,13 @@ final class WeatherServiceImpl: WeatherService {
     private func getForecast(
         for coordinates: CoordinatesResponse
     ) -> Single<WeatherForecastResponse> {
-        let url = buildWeatherForecastURL(for: coordinates)
-        return get(url: url)
+        let request = URLRequest(url: buildWeatherForecastURL(for: coordinates))
+        return dataFetcher.data(for: request)
     }
 
     private func getCooridinates(for city: String) -> Single<[CoordinatesResponse]> {
-        let url = buildGeocodingURL(for: city)
-        return get(url: url)
-    }
-
-    private func get<T: Decodable>(url: URL) -> Single<T> {
-        Single.create { single in
-            let request = URLRequest(url: url)
-            let task = URLSession.shared.dataTask(with: request) { data, response, error in
-                if let error = error {
-                    single(.failure(error))
-                    return
-                }
-
-                if let statusCode = (response as? HTTPURLResponse)?.statusCode, statusCode != 200 {
-                    single(.failure(WeatherServiceError.statusCode(statusCode)))
-                    return
-                }
-
-                guard let data = data else {
-                    single(.failure(WeatherServiceError.missingData))
-                    return
-                }
-
-                do {
-                    let response = try JSONDecoder().decode(T.self, from: data)
-
-                    single(.success(response))
-                } catch {
-                    single(.failure(WeatherServiceError.decoding))
-                    return
-                }
-
-            }
-
-            task.resume()
-
-            return Disposables.create { task.cancel() }
-        }
+        let request = URLRequest(url: buildGeocodingURL(for: city))
+        return dataFetcher.data(for: request)
     }
 
     private func buildGeocodingURL(for city: String) -> URL {

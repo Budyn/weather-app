@@ -23,7 +23,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     private func buildHome() -> UIViewController {
-        let weatherService = WeatherServiceImpl()
+        let dataFetcher = DataFetcher(urlSession: .shared)
+        let weatherService = WeatherServiceImpl(dataFetcher: dataFetcher)
         let weatherRepository = WeatherRepositoryImpl(weatherService: weatherService)
         let navigationController = UINavigationController()
         let viewModel = HomeViewModelImpl(
