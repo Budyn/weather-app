@@ -2,7 +2,7 @@ import Foundation
 import RxSwift
 @testable import Weather
 
-final class DataFetcherMock: DataFetching {
+final class DataFetcherStub: DataFetching {
 
     private let response: String
     private let errorToSend: Error?

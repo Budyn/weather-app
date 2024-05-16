@@ -19,7 +19,7 @@ final class GeocodingServiceTests: XCTestCase {
     }
 
     func testGetCoordinatesReturnsCoordinates() {
-        let dataFetcher = DataFetcherMock(response: fakeCoordinatesResponse)
+        let dataFetcher = DataFetcherStub(response: fakeCoordinatesResponse)
         let sut = GeocodingServiceImpl(dataFetcher: dataFetcher)
 
         let expectation = expectation(description: "Should send data")
@@ -47,7 +47,7 @@ final class GeocodingServiceTests: XCTestCase {
     }
 
     func testGetCoordinatesWihCorruptedDataReturnsError() {
-        let dataFetcher = DataFetcherMock(errorToSend: DataFetchingError.decoding)
+        let dataFetcher = DataFetcherStub(errorToSend: DataFetchingError.decoding)
         let sut = GeocodingServiceImpl(dataFetcher: dataFetcher)
 
         let expectation = expectation(description: "Should send error")

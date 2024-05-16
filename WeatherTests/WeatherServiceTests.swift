@@ -19,7 +19,7 @@ final class WeatherServiceTests: XCTestCase {
     }
 
     func testGetWeatherForecastReturnsWeatherForecast() {
-        let dataFetcher = DataFetcherMock(response: fakeWeatherForecast)
+        let dataFetcher = DataFetcherStub(response: fakeWeatherForecast)
         let geocodingStub = GeocodingServiceStub(
             response: CoordinatesResponse(latitude: 40, longitude: 40)
         )
@@ -53,7 +53,7 @@ final class WeatherServiceTests: XCTestCase {
     }
 
     func testGetWeatherForecastWithCorruptedResponseReturnsError() {
-        let dataFetcher = DataFetcherMock(errorToSend: DataFetchingError.decoding)
+        let dataFetcher = DataFetcherStub(errorToSend: DataFetchingError.decoding)
         let geocodingStub = GeocodingServiceStub(
             response: CoordinatesResponse(latitude: 40, longitude: 40)
         )
