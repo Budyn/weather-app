@@ -23,24 +23,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     private func buildHome() -> UIViewController {
-//        let dataFetcher = DataFetcher(urlSession: .shared)
-//        let geocodingService = GeocodingServiceImpl(dataFetcher: dataFetcher)
-//        let weatherService = WeatherServiceImpl(
-//            dataFetcher: dataFetcher,
-//            geocodingService: geocodingService
-//        )
-//        let weatherRepository = WeatherRepositoryImpl(weatherService: weatherService)
+        let dataFetcher = DataFetcher(urlSession: .shared)
+        let geocodingService = GeocodingServiceImpl(dataFetcher: dataFetcher)
+        let weatherService = WeatherServiceImpl(
+            dataFetcher: dataFetcher,
+            geocodingService: geocodingService
+        )
+        let weatherRepository = WeatherRepositoryImpl(weatherService: weatherService)
         let navigationController = UINavigationController()
-//        let viewModel = HomeViewModelImpl(
-//            router: HomeRouter(navigationController: navigationController),
-//            weatherRepository: weatherRepository
-//        )
-//        let viewController = HomeViewController(
-//            state: viewModel.state.map(HomePresenter().makeViewState(from:)),
-//            viewModel: viewModel
-//        )
-//
-//        navigationController.setViewControllers([viewController], animated: false)
+        let viewModel = HomeViewModelImpl(
+            router: HomeRouter(navigationController: navigationController),
+            weatherRepository: weatherRepository
+        )
+        let viewController = HomeViewController(
+            state: viewModel.state.map(HomePresenter().makeViewState(from:)),
+            viewModel: viewModel
+        )
+
+        navigationController.setViewControllers([viewController], animated: false)
 
         return navigationController
     }
