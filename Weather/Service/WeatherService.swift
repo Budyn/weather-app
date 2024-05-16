@@ -13,23 +13,27 @@ enum WeatherServiceError: Error {
 final class WeatherServiceImpl: WeatherService {
 
     private let dataFetcher: DataFetching
+    private let geocodingService: GeocodingService
 
-    init(dataFetcher: DataFetching) {
+    init(dataFetcher: DataFetching, geocodingService: GeocodingService) {
         self.dataFetcher = dataFetcher
+        self.geocodingService = geocodingService
     }
 
     private let apiKey = "4983eab2521f985c5ec7f3c38e4808ea"
 
     func getWeatherForecast(in city: String, numberOfDays: Int) -> Single<[WeatherForecast]> {
-        getCooridinates(for: city).flatMap { [weak self] coordinates in
-            guard let self = self else { throw WeatherServiceError.deallocated }
-            guard let coordinates = coordinates.first else { throw WeatherServiceError.missingData }
+        geocodingService.getCoordinates(for: city)
+            .flatMap { [weak self] in
+                guard let self = self else { throw WeatherServiceError.deallocated }
+                guard let coordinates = $0 else { throw WeatherServiceError.missingData }
 
-            return self.getForecast(for: coordinates)
-        }.map { [weak self] response in
-            guard let self = self else { throw WeatherServiceError.deallocated }
-            return self.extractWeatherForecasts(from: response, numberOfDays: numberOfDays)
-        }
+                return self.getForecast(for: coordinates)
+            }
+            .map { [weak self] response in
+                guard let self = self else { throw WeatherServiceError.deallocated }
+                return self.extractWeatherForecasts(from: response, numberOfDays: numberOfDays)
+            }
     }
 
     private func extractWeatherForecasts(
@@ -79,26 +83,6 @@ final class WeatherServiceImpl: WeatherService {
     ) -> Single<WeatherForecastResponse> {
         let request = URLRequest(url: buildWeatherForecastURL(for: coordinates))
         return dataFetcher.data(for: request)
-    }
-
-    private func getCooridinates(for city: String) -> Single<[CoordinatesResponse]> {
-        let request = URLRequest(url: buildGeocodingURL(for: city))
-        return dataFetcher.data(for: request)
-    }
-
-    private func buildGeocodingURL(for city: String) -> URL {
-        var urlComponents = URLComponents()
-
-        urlComponents.scheme = "http"
-        urlComponents.host = "api.openweathermap.org"
-        urlComponents.path = "/geo/1.0/direct"
-        urlComponents.queryItems = [
-            URLQueryItem(name: "q", value: city.lowercased()),
-            URLQueryItem(name: "limit", value: "10"),
-            URLQueryItem(name: "appid", value: apiKey)
-        ]
-
-        return urlComponents.url!
     }
 
     private func buildWeatherForecastURL(for coordinates: CoordinatesResponse) -> URL {

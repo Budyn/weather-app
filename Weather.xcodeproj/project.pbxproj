@@ -13,6 +13,7 @@
 		65065A612BF3A9750004AEF2 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 65065A602BF3A9750004AEF2 /* Base */; };
 		651332602BF60ACD00AE63F0 /* DataFetcherMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6513325F2BF60ACD00AE63F0 /* DataFetcherMock.swift */; };
 		651332622BF60B3300AE63F0 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 651332612BF60B3300AE63F0 /* RxSwift */; };
+		651332642BF61E7700AE63F0 /* GeocodingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 651332632BF61E7700AE63F0 /* GeocodingService.swift */; };
 		65222BFD2BF5FE0C00F1B880 /* WeatherServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65222BFC2BF5FE0C00F1B880 /* WeatherServiceTests.swift */; };
 		65222C082BF604AA00F1B880 /* DataFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65222C072BF604AA00F1B880 /* DataFetcher.swift */; };
 		65222C0A2BF607E500F1B880 /* RxTest in Frameworks */ = {isa = PBXBuildFile; productRef = 65222C092BF607E500F1B880 /* RxTest */; };
@@ -68,6 +69,7 @@
 		65065A5D2BF3A9750004AEF2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		65065A602BF3A9750004AEF2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6513325F2BF60ACD00AE63F0 /* DataFetcherMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataFetcherMock.swift; sourceTree = "<group>"; };
+		651332632BF61E7700AE63F0 /* GeocodingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeocodingService.swift; sourceTree = "<group>"; };
 		65222BFA2BF5FE0C00F1B880 /* WeatherTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WeatherTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		65222BFC2BF5FE0C00F1B880 /* WeatherServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherServiceTests.swift; sourceTree = "<group>"; };
 		65222C072BF604AA00F1B880 /* DataFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataFetcher.swift; sourceTree = "<group>"; };
@@ -207,6 +209,7 @@
 			isa = PBXGroup;
 			children = (
 				655BE3792BF3BD9D001D8F29 /* WeatherService.swift */,
+				651332632BF61E7700AE63F0 /* GeocodingService.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -383,6 +386,7 @@
 				65EF12B92BF4165D00319A75 /* UIView+Extensions.swift in Sources */,
 				65EF12AD2BF3E08900319A75 /* WeatherRepository.swift in Sources */,
 				655BE3662BF3B494001D8F29 /* DetailViewPresenter.swift in Sources */,
+				651332642BF61E7700AE63F0 /* GeocodingService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
