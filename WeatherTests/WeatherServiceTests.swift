@@ -6,16 +6,67 @@ import XCTest
 
 final class WeatherServiceTests: XCTestCase {
 
-    func testGetWeatherForecastWithCorruptedResponseReturnsError() {
-        let disposeBag = DisposeBag()
-        let errorToSend = DataFetchingError.decoding
-        let dataFetcher = DataFetcherMock(response: "", errorToSend: errorToSend)
-        
+    private var disposeBag: DisposeBag!
+
+    override func setUp() {
+        super.setUp()
+        disposeBag = DisposeBag()
+    }
+
+    override func tearDown() {
+        disposeBag = nil
+        super.tearDown()
+    }
+
+    func testGetWeatherForecastReturnsWeatherForecast() {
+        let dataFetcher = DataFetcherMock(response: fakeWeatherForecast)
+        let geocodingStub = GeocodingServiceStub(
+            response: CoordinatesResponse(latitude: 40, longitude: 40)
+        )
+        let sut = WeatherServiceImpl(
+            dataFetcher: dataFetcher,
+            geocodingService: geocodingStub
+        )
+
         let expectation = expectation(description: "Should send error")
 
-        dataFetcher.data(for: buildFakeRequest()).asObservable()
+        sut.getWeatherForecast(in: "Paris", numberOfDays: 5).asObservable()
             .subscribe(
-                onNext: { (response: String) in
+                onNext: { response in
+                    XCTAssertEqual(response.count, 5)
+                    XCTAssertEqual(response.first!.forecasts.first!.pressure, 1008)
+                    XCTAssertEqual(response.first!.forecasts.first!.conditionsDescription, "clear sky")
+                    expectation.fulfill()
+                },
+                onError: { _ in
+                    XCTFail("Should not happen")
+                }
+            )
+            .disposed(by: disposeBag)
+
+        waitForExpectations(timeout: 0.5) { error in
+            guard error == nil else {
+                XCTFail(error!.localizedDescription)
+                return
+            }
+        }
+    }
+
+    func testGetWeatherForecastWithCorruptedResponseReturnsError() {
+        let dataFetcher = DataFetcherMock(errorToSend: DataFetchingError.decoding)
+        let geocodingStub = GeocodingServiceStub(
+            response: CoordinatesResponse(latitude: 40, longitude: 40)
+        )
+        let sut = WeatherServiceImpl(
+            dataFetcher: dataFetcher,
+            geocodingService: geocodingStub
+        )
+
+        let expectation = expectation(description: "Should send error")
+
+        sut.getWeatherForecast(in: "Paris", numberOfDays: 5).asObservable()
+            .subscribe(
+                onNext: { _ in
                     XCTFail("Should not happen")
                 },
                 onError: {
@@ -29,7 +80,7 @@ final class WeatherServiceTests: XCTestCase {
             )
             .disposed(by: disposeBag)
 
-        waitForExpectations(timeout: 1) { error in
+        waitForExpectations(timeout: 0.5) { error in
             guard error == nil else {
                 XCTFail(error!.localizedDescription)
                 return
@@ -38,7 +89,3 @@ final class WeatherServiceTests: XCTestCase {
     }
 }
 
-private func buildFakeRequest() -> URLRequest {
-    let fakeURL = URL.documentsDirectory
-    return URLRequest(url: fakeURL)
-}

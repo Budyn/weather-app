@@ -12,8 +12,9 @@
 		65065A5E2BF3A9750004AEF2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 65065A5D2BF3A9750004AEF2 /* Assets.xcassets */; };
 		65065A612BF3A9750004AEF2 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 65065A602BF3A9750004AEF2 /* Base */; };
 		651332602BF60ACD00AE63F0 /* DataFetcherMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6513325F2BF60ACD00AE63F0 /* DataFetcherMock.swift */; };
-		651332622BF60B3300AE63F0 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 651332612BF60B3300AE63F0 /* RxSwift */; };
 		651332642BF61E7700AE63F0 /* GeocodingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 651332632BF61E7700AE63F0 /* GeocodingService.swift */; };
+		651332662BF6207900AE63F0 /* GeocodingServiceStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 651332652BF6207900AE63F0 /* GeocodingServiceStub.swift */; };
+		651332682BF625CF00AE63F0 /* FakeWeatherResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 651332672BF625CF00AE63F0 /* FakeWeatherResponse.swift */; };
 		65222BFD2BF5FE0C00F1B880 /* WeatherServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65222BFC2BF5FE0C00F1B880 /* WeatherServiceTests.swift */; };
 		65222C082BF604AA00F1B880 /* DataFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65222C072BF604AA00F1B880 /* DataFetcher.swift */; };
 		65222C0A2BF607E500F1B880 /* RxTest in Frameworks */ = {isa = PBXBuildFile; productRef = 65222C092BF607E500F1B880 /* RxTest */; };
@@ -70,6 +71,8 @@
 		65065A602BF3A9750004AEF2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6513325F2BF60ACD00AE63F0 /* DataFetcherMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataFetcherMock.swift; sourceTree = "<group>"; };
 		651332632BF61E7700AE63F0 /* GeocodingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeocodingService.swift; sourceTree = "<group>"; };
+		651332652BF6207900AE63F0 /* GeocodingServiceStub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeocodingServiceStub.swift; sourceTree = "<group>"; };
+		651332672BF625CF00AE63F0 /* FakeWeatherResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeWeatherResponse.swift; sourceTree = "<group>"; };
 		65222BFA2BF5FE0C00F1B880 /* WeatherTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WeatherTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		65222BFC2BF5FE0C00F1B880 /* WeatherServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherServiceTests.swift; sourceTree = "<group>"; };
 		65222C072BF604AA00F1B880 /* DataFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataFetcher.swift; sourceTree = "<group>"; };
@@ -107,7 +110,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				651332622BF60B3300AE63F0 /* RxSwift in Frameworks */,
 				65222C0A2BF607E500F1B880 /* RxTest in Frameworks */,
 				65222C0C2BF607E800F1B880 /* RxBlocking in Frameworks */,
 			);
@@ -155,6 +157,8 @@
 			isa = PBXGroup;
 			children = (
 				6513325F2BF60ACD00AE63F0 /* DataFetcherMock.swift */,
+				651332652BF6207900AE63F0 /* GeocodingServiceStub.swift */,
+				651332672BF625CF00AE63F0 /* FakeWeatherResponse.swift */,
 			);
 			path = Fake;
 			sourceTree = "<group>";
@@ -296,7 +300,6 @@
 			packageProductDependencies = (
 				65222C092BF607E500F1B880 /* RxTest */,
 				65222C0B2BF607E800F1B880 /* RxBlocking */,
-				651332612BF60B3300AE63F0 /* RxSwift */,
 			);
 			productName = WeatherTests;
 			productReference = 65222BFA2BF5FE0C00F1B880 /* WeatherTests.xctest */;
@@ -395,6 +398,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				65222BFD2BF5FE0C00F1B880 /* WeatherServiceTests.swift in Sources */,
+				651332662BF6207900AE63F0 /* GeocodingServiceStub.swift in Sources */,
+				651332682BF625CF00AE63F0 /* FakeWeatherResponse.swift in Sources */,
 				651332602BF60ACD00AE63F0 /* DataFetcherMock.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -678,11 +683,6 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		651332612BF60B3300AE63F0 /* RxSwift */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 655BE36F2BF3B7B1001D8F29 /* XCRemoteSwiftPackageReference "RxSwift" */;
-			productName = RxSwift;
-		};
 		65222C092BF607E500F1B880 /* RxTest */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 655BE36F2BF3B7B1001D8F29 /* XCRemoteSwiftPackageReference "RxSwift" */;
